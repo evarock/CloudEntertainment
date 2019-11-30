@@ -1,10 +1,10 @@
-package com.entertainment.common;
+package com.entertainment.authservice;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Integer> {
-    UserEntity findByUsername(String username);
+    UserEntity findByLogin(String login);
     UserEntity findByEmail(String email);
 }

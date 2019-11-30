@@ -1,4 +1,4 @@
-package com.entertainment.common;
+package com.entertainment.authservice;
 
 import org.springframework.stereotype.Component;
 
@@ -6,10 +6,10 @@ import javax.persistence.*;
 
 @Entity
 @Component
-@Table(name = "users", catalog = "ent_users_db")
+@Table(name = "users", catalog = "ent_auth_users")
 public class UserEntity {
     private Integer id;
-    private String username;
+    private String login;
     private String email;
     private String password;
     private String role;
@@ -18,7 +18,7 @@ public class UserEntity {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
@@ -27,13 +27,13 @@ public class UserEntity {
         this.id = id;
     }
 
-    @Column(name = "username")
-    public String getUsername() {
-        return username;
+    @Column(name = "login")
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     @Column(name = "email")

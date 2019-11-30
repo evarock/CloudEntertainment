@@ -17,7 +17,6 @@ import lombok.ToString;
  @Getter 		// lombok will create getters auto.
  @ToString		// [IMP] You need to install lombok jar file: https://stackoverflow.com/a/11807022
 public class JwtConfig {
-
 	// Spring doesn't inject/autowire to "static" fields. 
 	// Link: https://stackoverflow.com/a/6897406
 	@Value("${security.jwt.uri:/auth/**}")

@@ -3,6 +3,7 @@ package com.entertainment.authservice.security;
 import javax.servlet.http.HttpServletResponse;
 
 import com.entertainment.common.security.JwtConfig;
+import com.entertainment.common.security.JwtUserPasswordAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity 	// Enable security config. This annotation denotes config for spring security.
 public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
@@ -38,7 +40,8 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 
 		    // the authenticationManager() is object provided by WebSecurityConfigurerAdapter, used to authenticate the user passing user's credentials
 		    // The filter needs this auth manager to authenticate the user.
-		    .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig))	
+		    .addFilterAfter(new JwtUserPasswordAuthFilter(authenticationManager(), jwtConfig),
+						UsernamePasswordAuthenticationFilter.class)
 		.authorizeRequests()
 		    // allow all POST requests 
 		    .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()

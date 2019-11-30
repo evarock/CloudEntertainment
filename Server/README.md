@@ -11,7 +11,9 @@
 3. Zuul-Server
 4. Auth-Service
 
-### Steps to launch:
-1. Clean and install all projects using maven.
-2. Run projects using IDEA embedded Tomcat (tools in top right corner).
-3. Open [http://localhost:8761] in browser. All projects except server instance should be successfully registered.
+### Steps to local launch:
+1. Verify that all databases were created. First time it should be empty databases without tables.
+2. Open `Server` project. All other projects should be opened too.
+3. `Clean` and `install` all projects using maven.
+4. Run projects using IDEA embedded Tomcat (tools in top right corner).
+5. Open [http://localhost:8761] in browser. All projects except `Server` should be successfully registered.

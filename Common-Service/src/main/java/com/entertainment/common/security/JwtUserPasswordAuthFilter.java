@@ -24,12 +24,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class JwtUserPasswordAuthFilter extends UsernamePasswordAuthenticationFilter {
 	// We use auth manager to validate the user credentials
 	private AuthenticationManager authManager;
 	private final JwtConfig jwtConfig;
     
-	public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authManager, JwtConfig jwtConfig) {
+	public JwtUserPasswordAuthFilter(AuthenticationManager authManager, JwtConfig jwtConfig) {
 		this.authManager = authManager;
 		this.jwtConfig = jwtConfig;
 		// By default, UsernamePasswordAuthenticationFilter listens to "/login" path. 
@@ -38,8 +38,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 	}
 	
 	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-			throws AuthenticationException {
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 		try {
 			// 1. Get credentials from request
 			UserCredentials creds = new ObjectMapper().readValue(request.getInputStream(), UserCredentials.class);

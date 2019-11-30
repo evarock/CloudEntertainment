@@ -18,10 +18,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
-public class JwtTokenAuthenticationFilter extends  OncePerRequestFilter {
+public class JwtTokenAuthFilter extends  OncePerRequestFilter {
 	private final JwtConfig jwtConfig;
 	
-	public JwtTokenAuthenticationFilter(JwtConfig jwtConfig) {
+	public JwtTokenAuthFilter(JwtConfig jwtConfig) {
 		this.jwtConfig = jwtConfig;
 	}
 

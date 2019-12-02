@@ -3,13 +3,19 @@
 2) Maven 3.6.2
 3) MySQL 8
 4) Git 2.24
-5) IntelliJ IDEA 2019.2.4 Ultimate
+5) IntelliJ IDEA Ultimate
+6) Tomcat 8.5
 
 ### Projects' order:
 1. Server
 2. Common-Service
-3. Zuul-Server
-4. Auth-Service
+3. Auth-Service
+4. UserService
+4. Zuul-Server
+
+## Databases:
+1. ent_users
+2. ent_auth_users
 
 ### Steps to local launch:
 1. Verify that all databases were created. First time it should be empty databases without tables.

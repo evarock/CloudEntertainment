@@ -8,9 +8,8 @@
 
 ### Projects' order:
 1. Server
-2. Common-Service
-3. Auth-Service
-4. UserService
+2. ~~Auth-Service~~
+3. UserService
 4. Zuul-Server
 
 ## Databases:

@@ -1,0 +1,34 @@
+Requests to UserController.
+Note: no auth.
+
+* getUser:
+1) GET http://localhost:8762/users/{username}
+2) Headers: Accept application/json
+Successful result: user in JSON format
+{
+    "username": "username",
+    "email": null,
+    "phone": null,
+    "dob": null,
+    "gender": "FEMALE",
+    "initDate": "2019-12-07",
+    "organization": false
+}
+Failed result: error string
+
+* createUser:
+1) POST http://localhost:8762/users/
+2) Headers: Accept application/json, Content-Type application/json
+3) Body: user in JSON format
+Successful and failed results are the same with getUser
+
+* updateUser:
+1) PUT http://localhost:8762/users/
+2), 3), successful and failed results as createUser
+
+* deleteUser
+1) DELETE http://localhost:8762/users/{username}
+2) as getUser
+Successful result: 200 code without body
+Failed result: error string
+

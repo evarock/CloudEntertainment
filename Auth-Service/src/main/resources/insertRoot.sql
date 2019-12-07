@@ -1,10 +1,6 @@
 INSERT INTO `ent_auth_users`.`users`
-(`email`,
-`login`,
-`password`,
-`role`)
+(`username`,
+ `password`)
 VALUES
-("",
-"root",
-"root",
-"root");
+("root",
+ "root");

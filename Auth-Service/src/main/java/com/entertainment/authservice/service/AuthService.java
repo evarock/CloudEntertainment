@@ -3,5 +3,6 @@ package com.entertainment.authservice.service;
 import com.entertainment.authservice.model.AuthEntity;
 
 public interface AuthService {
-    void create(AuthEntity user);
+    AuthEntity create(AuthEntity user);
+    AuthEntity getAuth(AuthEntity user);
 }

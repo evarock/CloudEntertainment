@@ -28,7 +28,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserEntity create(UserEntity user) {
-        if (isValid(user)) {
+        if (isInvalid(user)) {
             throw new IllegalArgumentException("Invalid user's parameters");
         }
         Optional<UserEntity> existing = userRepository.findById(user.getUsername());
@@ -40,7 +40,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserEntity update(UserEntity user) {
-        if (isValid(user)) {
+        if (isInvalid(user)) {
             throw new IllegalArgumentException("Invalid user's parameters");
         }
         Optional<UserEntity> existing = userRepository.findById(user.getUsername());
@@ -59,7 +59,7 @@ public class UserServiceImp implements UserService {
         userRepository.deleteById(username);
     }
 
-    private boolean isValid(UserEntity user) {
+    private boolean isInvalid(UserEntity user) {
         return user == null || user.getOrganization() == null || user.getInitDate() == null;
     }
 }

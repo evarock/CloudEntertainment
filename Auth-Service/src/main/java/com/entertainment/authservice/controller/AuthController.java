@@ -3,31 +3,50 @@ package com.entertainment.authservice.controller;
 import com.entertainment.authservice.model.AuthEntity;
 import com.entertainment.authservice.service.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
-@Path("/auth")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthController {
+    private final RestTemplate restTemplate;
     private final AuthServiceImpl authService;
 
     @Autowired
-    public AuthController(AuthServiceImpl authService) {
+    public AuthController(AuthServiceImpl authService, RestTemplate restTemplate) {
         this.authService = authService;
+        this.restTemplate = restTemplate;
     }
 
-    @POST
-    @Path("/")
-    public Response addAuth(AuthEntity authEntity) {
+    @PostMapping(value = "/get", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAuth(@RequestBody AuthEntity authEntity) {
+//        String user;
+//        try {
+//            AuthEntity auth = authService.getAuth(authEntity);
+//            user = restTemplate.getForObject("http://localhost:8762/users/" + auth.getUsername(), String.class);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+//        }
+//        return ResponseEntity.ok(user);
+        AuthEntity auth;
+        try {
+            auth = authService.getAuth(authEntity);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity addAuth(@RequestBody AuthEntity authEntity) {
         try {
             authService.create(authEntity);
         } catch (Exception e) {
-            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
-        return Response.status(Response.Status.CREATED).entity(authEntity).build();
+        return ResponseEntity.ok(authEntity);
     }
 }

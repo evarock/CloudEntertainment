@@ -1,7 +1,8 @@
 package com.entertainment.userservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.validator.constraints.UniqueElements;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -15,8 +16,12 @@ public class UserEntity {
     private String username;
     private String email;
     private Integer phone;
+    @JsonSerialize(using=JsonDateSerializer.class)
+    @JsonDeserialize(using=JsonDateDeserializer.class)
     private Date dob;
     private Gender gender;
+    @JsonSerialize(using=JsonDateSerializer.class)
+    @JsonDeserialize(using=JsonDateDeserializer.class)
     private Date initDate;
     private Boolean isOrganization;
 

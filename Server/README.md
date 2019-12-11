@@ -8,7 +8,7 @@
 
 ### Projects' order:
 1. Server
-2. ~~Auth-Service~~
+2. Auth-Service
 3. UserService
 4. Zuul-Server
 

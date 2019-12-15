@@ -36,8 +36,7 @@ public class AuthServiceImpl implements AuthService {
 		}
 		Optional<AuthEntity> existing = authRepository.findById(auth.getUsername());
 		if (existing.isPresent()) {
-//			if (encoder.matches(auth.getPassword(), existing.get().getPassword())) {
-			if (auth.getPassword().equals(existing.get().getPassword())) {
+			if (encoder.matches(auth.getPassword(), existing.get().getPassword())) {
 				return auth;
 			} else {
 				throw new IllegalArgumentException("Auth service: password is invalid");
@@ -45,6 +44,14 @@ public class AuthServiceImpl implements AuthService {
 		} else {
 			throw new IllegalArgumentException("Auth service: user is not found");
 		}
+	}
+
+	@Override
+	public void delete(String username) {
+		if (username == null) {
+			throw new IllegalArgumentException("Username should not be empty");
+		}
+		authRepository.deleteById(username);
 	}
 
 	private boolean isInvalid(AuthEntity auth) {

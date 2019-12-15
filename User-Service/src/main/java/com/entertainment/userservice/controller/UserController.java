@@ -1,10 +1,14 @@
 package com.entertainment.userservice.controller;
 
+import com.entertainment.userservice.model.Gender;
 import com.entertainment.userservice.model.UserEntity;
 import com.entertainment.userservice.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,10 +31,19 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity addUser(@RequestBody UserEntity user) {
+    @PostMapping(value = "/")
+    public ResponseEntity addUser(@RequestBody Map<String, Object> values) {
+        if (values == null || values.size() != 1) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("UserService has wrong input parameters");
+        }
+        UserEntity user;
         try {
-            userService.create(user);
+            String username = (String) values.get("username");
+            if (username == null || username.isEmpty()) {
+                throw new Exception("UserService: username is empty");
+            }
+            user = userService.create(new UserEntity(username, null, null, null, Gender.UNKNOWN,
+                    new Date(),false));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }

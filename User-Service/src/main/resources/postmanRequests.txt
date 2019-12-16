@@ -1,3 +1,4 @@
+### OBSOLETE ###
 Requests to UserController.
 Note: no auth.
 
